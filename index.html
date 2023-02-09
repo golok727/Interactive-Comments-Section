@@ -10,11 +10,63 @@
 	</head>
 	<body>
 		<!-- <h1>Radhey Shyam</h1> -->
+
 		<main>
-			<div class="main__comments-container"></div>
+			<div class="main__comments-container">
+				<!--!  -->
+				<!--Each Comment  -->
+				<div class="each-comment-container" data-comment data-comment-id="11">
+					<div class="main__comments-container__comment">
+						<!-- Left -->
+						<div class="main__comments-container__comment-left">
+							<div class="score">
+								<div class="score-change-buttons">
+									<img src="assets/images/icon-plus.svg" alt="" srcset="" />
+								</div>
+								<h3>10</h3>
+
+								<div class="score-change-buttons">
+									<img src="assets/images/icon-minus.svg" alt="" srcset="" />
+								</div>
+							</div>
+						</div>
+						<!-- Right -->
+						<div class="main__comments-container__comment-right">
+							<header>
+								<div>
+									<div class="avatar-container">
+										<img
+											src="assets/images/avatars/image-amyrobson.webp"
+											alt=""
+										/>
+									</div>
+									<h4><span data-comment-user-name>amyrobson</span></h4>
+									<span data-time-ago>1 month ago</span>
+								</div>
+								<div class="reply-btn">
+									<img src="assets/images/icon-reply.svg" alt="" />
+									<h5>
+										<span>Reply</span>
+									</h5>
+								</div>
+							</header>
+							<p class="comment-content">
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
+								eligendi quaerat adipisci veritatis labore commodi consequuntur
+								asperiores cum maiores eos mollitia ullam perferendis
+								voluptatibus saepe eaque cumque similique, minus dolore.
+							</p>
+						</div>
+					</div>
+					<!-- Replys -->
+					<div class="each-comment-container__replys"></div>
+				</div>
+				<!-- Each Comment End  -->
+				<!--!  -->
+			</div>
 
 			<form class="main__add-comment" data-add-comment>
-				<div class="main__add-comment__img-container">
+				<div class="avatar-container">
 					<img src="assets/images/avatars/image-juliusomo.webp" alt="" />
 				</div>
 				<textarea name="" id="" placeholder="Add a comment..."></textarea>
