@@ -226,12 +226,22 @@ main {
 	display: flex;
 	align-items: center;
 	color: var(--clr-primary-blue);
+	transition: all 0.2s ease;
+}
+
+.reply-btn:hover {
+	cursor: pointer;
+}
+
+.reply-btn:hover > img {
+	rotate: 180deg;
 }
 
 .reply-btn img {
 	margin-right: 0.3rem;
 	object-fit: contain;
 	width: 0.7rem;
+	transition: all 0.2s ease;
 }
 
 .main__comments-container__comment-right .comment-content {
