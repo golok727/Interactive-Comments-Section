@@ -238,3 +238,24 @@ main {
 	color: var(--clr-neutral-grayish-blue);
 	font-size: 0.8rem;
 }
+
+.each-comment-container__replys {
+	width: 100%;
+	margin-bottom: 1rem;
+	padding-left: 4rem;
+	position: relative;
+}
+.each-comment-container__replys:not(:has(:first-child)) {
+	display: none;
+}
+
+.each-comment-container__replys::before {
+	content: "";
+	background-color: var(--clr-primary-greyish-blue);
+	width: 1px;
+	height: 100%;
+	top: 0;
+	left: 2rem;
+
+	position: absolute;
+}
