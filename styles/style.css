@@ -79,11 +79,12 @@ main {
 }
 /* Btn */
 .btn {
+	border: none;
+	border-radius: 7px;
+	cursor: pointer;
+	color: var(--clr-neutral-white);
 	font-size: 0.7rem;
 	font-weight: 400;
-	color: var(--clr-neutral-white);
-	border-radius: 7px;
-	border: none;
 }
 
 .btn.btn-send {
