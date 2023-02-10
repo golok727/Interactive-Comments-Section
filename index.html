@@ -4,8 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="styles/style.css" />
-		<script src="src/radhe.js" defer type="module"></script>
+		<link rel="stylesheet" href="/styles/style.css" />
+		<script src="/src/radhe.js" defer type="module"></script>
 		<title>Interactive comments section</title>
 	</head>
 	<body>
@@ -49,7 +49,7 @@
 										<h4><span data-comment-user-name>amyrobson</span></h4>
 										<span data-time-ago>1 month ago</span>
 									</div>
-									<div class="reply-btn">
+									<div data-reply-btn class="reply-btn">
 										<img src="assets/images/icon-reply.svg" alt="" />
 										<h5>
 											<span>Reply</span>
@@ -87,11 +87,16 @@
 				<!--!  -->
 			</div>
 
-			<form class="main__add-comment" data-add-comment>
+			<form class="main__add-comment" data-add-comment id="comment-form">
 				<div class="avatar-container">
 					<img src="assets/images/avatars/image-juliusomo.webp" alt="" />
 				</div>
-				<textarea name="" id="" placeholder="Add a comment..."></textarea>
+				<textarea
+					name="comment"
+					id=""
+					placeholder="Add a comment..."
+					form="comment-form"
+				></textarea>
 				<div class="">
 					<input type="submit" value="send" class="btn btn-send" />
 				</div>
