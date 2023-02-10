@@ -94,8 +94,6 @@ main {
 	:root {
 		font-size: 16px;
 	}
-	main {
-	}
 }
 @media (max-width: 532px) {
 	.main__add-comment {
