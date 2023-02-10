@@ -1,29 +1,13 @@
 console.log("Radhey Shyam");
 
-import { save, clear } from "./applicationHandler.js";
+import { save, clear, getParentId } from "./applicationHandler.js";
 class Comment {
 	constructor(content, user) {
 		this.id = Math.floor(Math.random() * 1000) + Date.now();
 		this.content = content;
 		this.formatter = new Intl.DateTimeFormat("en-GB", { dateStyle: "medium" });
 		this.createdAt = this.formatter.format(Date.now());
-		this.replies = [
-			{
-				id: 1,
-				content:
-					"Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
-				createdAt: "1 month ago",
-				score: 12,
-				user: {
-					image: {
-						png: "./images/avatars/image-amyrobson.png",
-						webp: "./images/avatars/image-amyrobson.webp",
-					},
-					username: "amyrobson",
-				},
-				replies: [],
-			},
-		];
+		this.replies = [];
 		this.user = user;
 		this.score = 0;
 	}
@@ -132,23 +116,67 @@ class Comment {
 		// TODO add error
 		if (e.target.comment.value === "") return;
 		const newComment = new Comment(e.target.comment.value, currentUser);
-		commentsContainer.appendChild(commentMaker(commentTemplate, newComment));
-		comments.push(newComment);
+		commentsContainer.insertBefore(
+			commentMaker(commentTemplate, newComment),
+			commentsContainer.firstChild
+		);
+		comments.unshift(newComment);
 		console.log(comments);
 		save({ comments, currentUser });
+		e.target.comment.value = "";
 		render();
+	}
+	function addReply(e, repliesContainer) {
+		if ($("[data-add-comment]", repliesContainer)) return;
+		const makeReplyClone = addCommentForm.cloneNode(true);
+
+		const id = getParentId(e.target);
+		const comment = findCommentById(comments, id);
+		console.log(comment);
+
+		repliesContainer.appendChild(makeReplyClone);
+		makeReplyClone.addEventListener("submit", (e) => {
+			e.preventDefault();
+			const content = e.target.querySelector("textarea").value;
+			if (content === "") return;
+			const newComment = new Comment(content, currentUser);
+			repliesContainer.insertBefore(
+				commentMaker(commentTemplate, newComment),
+				repliesContainer.firstChild
+			);
+			if (!comment.replies) {
+				comment.replies = [];
+				comment.replies.unshift(newComment);
+			} else {
+				comment.replies.unshift(newComment);
+			}
+			console.log(comments);
+			save({ comments, currentUser });
+			render();
+			const hide = $(`[data-comment-id='${id}']`).querySelector(
+				"[data-show-replies]"
+			);
+			hide.classList.remove("hidden");
+			hide.click();
+
+			makeReplyClone.remove();
+		});
 	}
 
 	function render() {
 		clear(commentsContainer);
 		comments?.forEach((comment) => {
 			const newComment = commentMaker(commentTemplate, comment);
+			const repliesContainer = $("[data-replies]", newComment);
 			$("[data-show-replies]", newComment).addEventListener("click", (e) =>
 				handleShowReplies(e)
 			);
 
 			$("[data-hide-replies]", newComment).addEventListener("click", (e) =>
 				handleHideReplies(e)
+			);
+			$("[data-reply-btn]", newComment).addEventListener("click", (e) =>
+				addReply(e, repliesContainer)
 			);
 			commentsContainer.appendChild(newComment);
 		});

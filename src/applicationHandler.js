@@ -5,3 +5,12 @@ export function save(state) {
 export function clear(container) {
 	while (container.firstChild) container.removeChild(container.lastChild);
 }
+
+export function getParentId(elm) {
+	let parent = elm;
+
+	while (!parent.getAttribute("data-comment-id")) {
+		parent = parent.parentElement;
+	}
+	return parseInt(parent.getAttribute("data-comment-id"));
+}
