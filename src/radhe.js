@@ -92,7 +92,10 @@ class Comment {
 			$("[data-hide-replies]", newComment).addEventListener("click", (e) =>
 				handleHideReplies(e)
 			);
-			``;
+			$("[data-reply-btn]", newComment).addEventListener("click", (e) =>
+				addReply(e, repliesContainer)
+			);
+
 			repliesContainer.appendChild(newComment);
 		});
 	}
@@ -128,6 +131,7 @@ class Comment {
 	}
 	function addReply(e, repliesContainer) {
 		if ($("[data-add-comment]", repliesContainer)) return;
+		console.log(repliesContainer);
 		const makeReplyClone = addCommentForm.cloneNode(true);
 
 		const id = getParentId(e.target);
@@ -138,7 +142,10 @@ class Comment {
 		makeReplyClone.addEventListener("submit", (e) => {
 			e.preventDefault();
 			const content = e.target.querySelector("textarea").value;
-			if (content === "") return;
+			if (content === "") {
+				repliesContainer.querySelector("[data-add-comment]").remove();
+				return;
+			}
 			const newComment = new Comment(content, currentUser);
 			repliesContainer.insertBefore(
 				commentMaker(commentTemplate, newComment),
@@ -153,11 +160,11 @@ class Comment {
 			console.log(comments);
 			save({ comments, currentUser });
 			render();
-			const hide = $(`[data-comment-id='${id}']`).querySelector(
+			const hide = $(`[data-comment-id='${id}']`)?.querySelector(
 				"[data-show-replies]"
 			);
-			hide.classList.remove("hidden");
-			hide.click();
+			// Todo REMOVE
+			hide?.classList.remove("hidden");
 
 			makeReplyClone.remove();
 		});
